@@ -1,0 +1,15 @@
+{
+  "name": "networkscanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://gogs@git.rareloot.at:11622/fchen/NetworkScanner.git"
+  },
+  "author": "RareLoot Media & IT",
+  "license": "ISC"
+}
