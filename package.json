@@ -4,12 +4,20 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
     "url": "ssh://gogs@git.rareloot.at:11622/fchen/NetworkScanner.git"
   },
   "author": "RareLoot Media & IT",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^2.0.9"
+  },
+  "dependencies": {
+    "electron-config": "^1.0.0",
+    "fs-extra": "^7.0.0"
+  }
 }
