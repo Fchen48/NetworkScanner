@@ -1,28 +1,17 @@
 // const electron = require("electron");
 // const ElectronConfig = require("electron-config");
 // const config = new ElectronConfig();
-const path = require("path");
-const fs = require("fs-extra");
-const spawn = require("child_process");
+// const path = require("path");
+// const fs = require("fs-extra");
+const discover = require("./functions/discover");
+// const portscan = require("./functions/portscan");
 
-const options = {
-    encoding: "utf8",
-    nmap: path.join(__dirname, "bin/nmap_bin/nmap.exe"),
-    range: [
-        "192.168.0.1/28"
-    ],
-    // timeout: 1,
-    verbose: false
-};
+discover()
+.then(array => {
+    console.log(array);
+})
+.catch(error => console.error(error));
 
-// const ping = spawn.exec(options.nmap + " -V", options, (error, stdout, stderr) => {
-//     if(error) return console.error(error);
-// });
-
-// ping.stdout.on("data", data => {
-//     console.log(data);
-// })
-
-// ping.on("close", code => {
-//     console.log("Exitcode: " + code);
-// })
+process.on("uncaughtException", (error) => {
+    console.trace(new Error(error));
+});
