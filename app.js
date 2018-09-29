@@ -33,5 +33,5 @@ process.on("uncaughtException", (error) => {
 
 setTimeout(() => {
     ping.stop();
-    console.log("stopped timeout");
+    console.log("STOPPED TIMEOUT");
 }, 3000);
