@@ -5,26 +5,28 @@ const network = require("./network");
 
 const cOptions = {
     encoding: "utf8",
-    timeout: 10000,
+    // timeout: 30000,
     windowsHide: true
 };
 
-const nOptions = {
-    nmap: path.join(__dirname, "../bin/nmap_bin/nmap.exe"),
+const scan = {
+    nmap: path.join(__dirname, "..", "bin", "nmap_bin", "nmap.exe"),
+    unprivileged: " --unprivileged",
     verbose: " -v",
     scanType: " -sn",
     output: " -oX -",
-    command() {return this.nmap + this.verbose + this.scanType + this.output + " ";}
+    command() {return this.nmap + this.verbose + this.unprivileged + this.scanType + this.output + " ";}
 }
 
 module.exports = () => new Promise(function (resolve, reject) {
     const hosts = [];
 
     network()
-    .then(cidrs => {
+    .then((ipv4, ipv6) => {
+        // const cidr = "192.168.0.10/24"
         let cidr = "";
 
-        cidrs.forEach(element => {
+        ipv4.forEach(element => {
             cidr += element + " ";
         });
 
@@ -49,7 +51,8 @@ function compareIP(a, b) {
 
 function discover(cidr) {
     return new Promise(function (resolve, reject) {
-        spawn.exec(nOptions.command() + cidr, cOptions, (error, data) => {
+        clock.start();
+        spawn.exec(scan.command() + cidr, cOptions, (error, data) => {
             if(error) return reject(error);
             parseXML(data, { trim: true }, (error, result) => {
                 if(error) return reject(error);
@@ -80,8 +83,25 @@ function discover(cidr) {
                         hostname
                     });
                 });
+                clock.stop();
                 return resolve(array);
             });
         });
     });
+}
+
+const clock = {
+    start() {
+        setTimeout(() => {
+            if(!this.active) return;
+            console.log("Time passed: " + this.timePassed);
+            this.timePassed++;
+            this.start();
+        }, 1000);
+    },
+    stop() {
+        this.active = false;
+    },
+    active: true,
+    timePassed: 1
 }
