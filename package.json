@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://gogs@git.rareloot.at:11622/fchen/NetworkScanner.git"
+    "url": "git@github.com:Fchen48/NetworkScanner.git"
   },
   "author": "RareLoot Media & IT",
   "license": "ISC",
