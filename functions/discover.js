@@ -73,8 +73,9 @@ function discover(cidr) {
                         vendor = host.address[1].$.vendor;
                     }
                     if(host.hostnames[0] !== "\r\n") {
-                        hostname = host.hostnames[0];
+                        hostname = host.hostnames[0].hostname[0].$.name;
                     }
+                    console.log(JSON.stringify(host));
 
                     array.push({
                         ip,
